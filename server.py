@@ -8,7 +8,7 @@ class miServer(SimpleHTTPRequestHandler):
             self.path = "index.html"
             return SimpleHTTPRequestHandler.do_GET(self)
     def do_POST(self):
-        longitud = int(self.headers["Content-Lenght"])
+        longitud = int(self.headers["Content-Length"])
         datos= self.rfile.read(longitud)
         datos = datos.decode()
         datos = parse.unquote(datos)
@@ -17,6 +17,6 @@ class miServer(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(datos.encode())
         
-print("Ejecutando server en puerto ", port)
+print("Ejecuntando server en puerto ", port)
 server = HTTPServer(("localhost", port), miServer)
 server.serve_forever()
